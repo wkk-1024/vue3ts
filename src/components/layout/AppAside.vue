@@ -1,0 +1,124 @@
+<script setup lang="ts">
+import { isCollapse } from './isCollapse'
+</script>
+
+<template>
+  <el-aside>
+    <el-scrollbar>
+      <el-menu router unique-opened :collapse="isCollapse">
+        <a href="/" class="logon-top">
+          <img src="@/assets/logo.svg" alt="" />
+          <h1>苹果</h1>
+        </a>
+        <el-sub-menu index="1">
+          <template #title>
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>技术部</span>
+          </template>
+          <el-menu-item index="/menus">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>蛇皮1</span>
+          </el-menu-item>
+          <el-menu-item index="">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>蛇皮2</span>
+          </el-menu-item>
+          <el-menu-item index="">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>蛇皮3</span>
+          </el-menu-item>
+          <el-menu-item index="">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>蛇皮4 </span>
+          </el-menu-item>
+        </el-sub-menu>
+
+        <el-menu-item index="">
+          <el-icon>
+            <IEpKnifeFork />
+          </el-icon>
+          <span>销售部</span>
+        </el-menu-item>
+        <el-menu-item index="">
+          <el-icon>
+            <IEpKnifeFork />
+          </el-icon>
+          <span>广告部</span>
+        </el-menu-item>
+
+        <el-sub-menu index="2">
+          <template>
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>采购部</span>
+          </template>
+          <el-menu-item index="">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>皮卡丘1</span>
+          </el-menu-item>
+          <el-menu-item index="">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>皮卡丘2</span>
+          </el-menu-item>
+          <el-menu-item index="">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>皮卡丘3</span>
+          </el-menu-item>
+        </el-sub-menu>
+      </el-menu>
+    </el-scrollbar>
+
+  </el-aside>
+</template>
+
+<style lang="scss" scoped>
+.el-aside {
+  background-color: #d1edc4;
+  height: 100vh;
+  width: auto;
+
+  .el-menu {
+    background-color: #d1edc4;
+    width: 200px;
+    border-right: none;
+
+    &.el-menu--collapse {
+      width: 60px;
+
+      & h1 {
+        display: none;
+      }
+    }
+  }
+
+  .logon-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    height: 60px;
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+</style>

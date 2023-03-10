@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 import AutoImport from 'unplugin-auto-import/vite'
@@ -13,10 +13,21 @@ import IconsResolver from 'unplugin-icons/resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      "/m1/2403133-0-default": {
+        target: loadEnv("", process.cwd()).VITE_API_URL, //'http://127.0.0.1:4523/',   
+        changeOrigin: true
+      }
+    }
+  },
   plugins: [
     vue(),
     AutoImport({
-      imports:["vue"],
+      imports: ['vue'],
+      eslintrc: {
+        enabled: true, // <-- this
+      },
       resolvers: [
         ElementPlusResolver(),
         // 自动导入icon
