@@ -23,7 +23,7 @@ import { isCollapse } from './isCollapse'
             </el-icon>
             <span>蛇皮1</span>
           </el-menu-item>
-          <el-menu-item index="">
+          <el-menu-item index="/login">
             <el-icon>
               <IEpKnifeFork />
             </el-icon>

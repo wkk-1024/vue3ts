@@ -15,7 +15,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 export default defineConfig({
   server: {
     proxy: {
-      "/m1/2403133-0-default": {
+      "/m1": {
         target: loadEnv("", process.cwd()).VITE_API_URL, //'http://127.0.0.1:4523/',   
         changeOrigin: true
       }
