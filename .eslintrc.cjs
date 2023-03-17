@@ -12,5 +12,14 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  rules: {
+    'eqeqeq': 1, // 使用===,!==
+     // 空行规则
+     'no-multiple-empty-lines': [1, {
+      max: 1, // 连续最大空行数
+      maxEOF: 0 // 文件末尾空行数
+    }],
+
   }
 }

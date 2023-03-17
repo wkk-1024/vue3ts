@@ -14,18 +14,18 @@ import IconsResolver from 'unplugin-icons/resolver'
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    proxy: {
+    proxy: { // 代理：请求为m1开头的url地址替换为'http://127.0.0.1:4523/'
       "/m1": {
-        target: loadEnv("", process.cwd()).VITE_API_URL, //'http://127.0.0.1:4523/',   
-        changeOrigin: true
+        target: loadEnv("", process.cwd()).VITE_API_URL,
+        changeOrigin: true  // 保留请求信息 使接受请求的服务器知道从哪里发送的请求
       }
     }
   },
   plugins: [
     vue(),
     AutoImport({
-      imports: ['vue'],
-      eslintrc: {
+      imports: ['vue'], // 自动导入ref() 等组件
+      eslintrc: {  // eslint 
         enabled: true, // <-- this
       },
       resolvers: [

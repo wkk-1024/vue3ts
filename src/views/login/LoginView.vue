@@ -1,39 +1,48 @@
-<script setup lang='ts'>
-import type { FormInstance, FormRules } from 'element-plus';
+<script setup lang="ts">
+import type { FormInstance, FormRules } from 'element-plus'
 import { LoginUser } from '@/api/user'
+import { myToken } from '@/stores/mytoken'
+import { useRouter, useRoute } from 'vue-router'
+
 type UserFrom = {
-  user_name: string,
+  user_name: string
   user_pwd: string
 }
 const fromLogin = reactive<UserFrom>({
   user_name: '',
-  user_pwd: '',
+  user_pwd: ''
 })
 
+// 定义token 数据
+const stores = myToken()
+// 路由
+const router = useRouter()
+const route = useRoute()
 // 登录请求
 const submit = async () => {
-  await fromRef.value?.validate().catch(err => {
-    ElMessage.error('校验失败')
+  await fromRef.value?.validate().catch((err) => {
+    ElMessage.error(err[Object.keys(err)[0]][0].message)
     throw err
   })
 
-  LoginUser(fromLogin).then(res => {
-    console.log(res);
-    
-
+  const data = await LoginUser(fromLogin).then((res) => {
+    if (!res.data.success) {
+      ElMessage.error(res.data.msg)
+      throw new Error('请求失败')
+    }
+    return res.data
   })
+  stores.saveToken(`${data.data}`)
 
+  ElMessage.success(data.msg)
 
+  router.push(route.query.redirect as string || '/')
 }
 
 // 表单校验规则
 const rules = reactive<FormRules>({
-  user_name: [
-    { required: true, message: '请输入用户名', trigger: "blur" }
-  ],
-  user_pwd: [
-    { required: true, message: '请输入密码', trigger: "blur" }
-  ]
+  user_name: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  user_pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 // 表单dom数据
 const fromRef = ref<FormInstance>()
@@ -43,14 +52,15 @@ const fromRef = ref<FormInstance>()
     <el-card class="box-card">
       <el-form :model="fromLogin" ref="fromRef" :rules="rules" label-width="80px" label-position="top">
         <el-form-item label="用户名" prop="user_name">
-          <el-input v-model="fromLogin.user_name" style="width: 200px;" />
+          <el-input v-model="fromLogin.user_name" clearable placeholder="请输入用户名" style="width: 200px" />
         </el-form-item>
 
         <el-form-item label="密码" prop="user_pwd">
-          <el-input v-model="fromLogin.user_pwd" style="width: 200px;" />
+          <el-input type="password" show-password placeholder="请输入密码" @keyup.enter="submit" v-model="fromLogin.user_pwd"
+            style="width: 200px" />
         </el-form-item>
 
-        <el-form-item style="margin-bottom: 0;">
+        <el-form-item style="margin-bottom: 0">
           <el-button @click="submit" type="primary">登录</el-button>
         </el-form-item>
       </el-form>
@@ -58,8 +68,7 @@ const fromRef = ref<FormInstance>()
   </div>
 </template>
 
-
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .content {
   display: flex;
   justify-content: center;
@@ -70,7 +79,7 @@ const fromRef = ref<FormInstance>()
     //width: 500px;
     padding: 30px;
 
-    ::v-deep .el-card__body {
+    :deep(.el-card__body) {
       padding-bottom: 0 !important;
     }
   }

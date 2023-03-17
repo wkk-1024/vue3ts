@@ -32,7 +32,6 @@ import { isCollapse } from './isCollapse'
   </el-header>
 </template>
 
-
 <style lang='scss' scoped>
 .el-header {
   display: flex;
@@ -43,7 +42,7 @@ import { isCollapse } from './isCollapse'
   .el-dropdown {
     margin-left: auto;
 
-    ::v-deep :focus {
+    :deep(:focus) {
       outline: 0;
     }
   }
@@ -59,7 +58,6 @@ import { isCollapse } from './isCollapse'
       display: flex;
       align-items: center;
     }
-
 
   }
 }
