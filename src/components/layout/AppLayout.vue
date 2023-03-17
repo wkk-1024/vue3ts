@@ -6,6 +6,7 @@ const stores = myToken()
 console.log(stores.token.token);
 
 getUserInfo({token:stores.token.token}).then(res => {
+  
   console.log(res);
   
 })
