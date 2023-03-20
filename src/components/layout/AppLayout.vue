@@ -1,15 +1,4 @@
 <script setup lang='ts'>
-import { getUserInfo } from '@/api/user/userInfo';
-import { myToken } from '@/stores/mytoken';
-
-const stores = myToken()
-console.log(stores.token.token);
-
-getUserInfo({token:stores.token.token}).then(res => {
-  
-  console.log(res);
-  
-})
 
 </script>
 

@@ -1,5 +1,53 @@
 <script setup lang='ts'>
 import { isCollapse } from './isCollapse'
+import { getUserInfo, exitUser } from '@/api/user';
+import { useRouter } from 'vue-router';
+import { myToken } from '@/stores/mytoken';
+
+const router = useRouter()
+type UserInfo = {
+  img_url: string
+  qq: string
+  user_name: string
+}
+const userInfo: UserInfo = reactive({
+  img_url: '',
+  qq: '',
+  user_name: ''
+})
+
+// 获取用户信息
+getUserInfo().then(res => {
+  if (!res.data.success) {
+    ElMessage.error('错误')
+    throw new Error('错误')
+  }
+  Object.assign(userInfo, res.data.data)
+})
+
+// 退出登录
+const exitLogin = async () => {
+
+  await ElMessageBox.confirm('确认退出？', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).catch(() => {
+    ElMessage.info('取消操作')
+    return new Promise(() => { })
+  })
+  //清除缓存
+  exitUser().then(res => {
+    if (!res.data.success) {
+      ElMessage.error('操作失败')
+      throw new Error("操作失败");
+    }
+    myToken().saveToken('')
+    ElMessage.success('成功退出')
+    router.push('login')
+  })
+
+}
 </script>
 
 <template>
@@ -19,13 +67,12 @@ import { isCollapse } from './isCollapse'
     <!-- 头像下拉框 -->
     <el-dropdown>
       <span class="el-dropdown-link">
-        <el-avatar :size="50"
-          src="https://p3-passport.byteimg.com/img/user-avatar/ec1d0d4df4a714ccb859b85542d73571~180x180.awebp" />
+        <el-avatar :size="50" :src="userInfo.img_url" />
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item>退出</el-dropdown-item>
+          <el-dropdown-item>{{ userInfo.user_name }}</el-dropdown-item>
+          <el-dropdown-item @click="exitLogin">退出</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

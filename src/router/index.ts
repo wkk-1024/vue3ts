@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
   const store = myToken()
   // 判断路由是否需要权限
   if (to.matched.some(r => r.meta?.requiresAuth)) {
-    if (!store.token.token) {
+    if (!store.token?.token) {
       next({ name: 'login', query: { redirect: to.fullPath } })
       return
     }

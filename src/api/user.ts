@@ -19,9 +19,29 @@ export const LoginUser = (LoginInFo: LoginInFo) => {
   return request<LoginResult>({
     method: 'POST',
     url: 'm1/2305304-0-default/login',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-    },
     data: qs.stringify(LoginInFo)
   })
 }
+
+// 获取用户信息
+type UserResult = {
+  success: boolean
+  data: Array<string>
+  state: number
+  msg: string
+}
+
+export const getUserInfo = () => {
+  return request<UserResult>({
+    method: 'GET',
+    url: '/m1/2305304-0-default/getInfo',
+  })
+}
+
+// 退出登录
+export const exitUser = () => {
+  return request({
+    method:'POST',
+    url:'/m1/2305304-0-default/user/exit',
+  })
+} 
