@@ -1,9 +1,9 @@
-import request from "@/utils/request";
+import request from '@/utils/request'
 import qs from 'qs'
 // 登录参数格式
 type LoginInFo = {
-  user_name: string
-  user_pwd: string
+  userName: string
+  userPwd: string
   code?: string
 }
 
@@ -34,14 +34,22 @@ type UserResult = {
 export const getUserInfo = () => {
   return request<UserResult>({
     method: 'GET',
-    url: '/m1/2305304-0-default/getInfo',
+    url: '/m1/2305304-0-default/getInfo'
   })
 }
 
 // 退出登录
 export const exitUser = () => {
   return request({
-    method:'POST',
-    url:'/m1/2305304-0-default/user/exit',
+    method: 'POST',
+    url: '/m1/2305304-0-default/user/exit'
   })
-} 
+}
+
+// 刷新token
+export const refreshToken = () => {
+  return request({
+    method: 'POST',
+    url: '/m1/2305304-0-default/token/refresh'
+  })
+}

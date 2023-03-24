@@ -5,12 +5,12 @@ import { myToken } from '@/stores/mytoken'
 import { useRouter, useRoute } from 'vue-router'
 
 type UserFrom = {
-  user_name: string
-  user_pwd: string
+  userName: string
+  userPwd: string
 }
 const fromLogin = reactive<UserFrom>({
-  user_name: '',
-  user_pwd: ''
+  userName: '',
+  userPwd: ''
 })
 
 // 定义token 数据
@@ -36,13 +36,13 @@ const submit = async () => {
 
   ElMessage.success(data.msg)
 
-  router.push(route.query.redirect as string || '/')
+  router.push((route.query.redirect as string) || '/')
 }
 
 // 表单校验规则
 const rules = reactive<FormRules>({
-  user_name: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-  user_pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+  userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  userPwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 // 表单dom数据
 const fromRef = ref<FormInstance>()
@@ -50,14 +50,31 @@ const fromRef = ref<FormInstance>()
 <template>
   <div class="content">
     <el-card class="box-card">
-      <el-form :model="fromLogin" ref="fromRef" :rules="rules" label-width="80px" label-position="top">
-        <el-form-item label="用户名" prop="user_name">
-          <el-input v-model="fromLogin.user_name" clearable placeholder="请输入用户名" style="width: 200px" />
+      <el-form
+        :model="fromLogin"
+        ref="fromRef"
+        :rules="rules"
+        label-width="80px"
+        label-position="top"
+      >
+        <el-form-item label="用户名" prop="userName">
+          <el-input
+            v-model="fromLogin.userName"
+            clearable
+            placeholder="请输入用户名"
+            style="width: 200px"
+          />
         </el-form-item>
 
         <el-form-item label="密码" prop="user_pwd">
-          <el-input type="password" show-password placeholder="请输入密码" @keyup.enter="submit" v-model="fromLogin.user_pwd"
-            style="width: 200px" />
+          <el-input
+            type="password"
+            show-password
+            placeholder="请输入密码"
+            @keyup.enter="submit"
+            v-model="fromLogin.userPwd"
+            style="width: 200px"
+          />
         </el-form-item>
 
         <el-form-item style="margin-bottom: 0">
