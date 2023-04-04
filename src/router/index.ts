@@ -14,12 +14,7 @@ const router = createRouter({
         {
           path: '',
           name: 'indexViews',
-          component: () => import('@/views/indexViews.vue'),
-        },
-        {
-          path: '/:pathMatch(.*)*',
-          name: 'ErrorView',
-          component: () => import('@/components/layout/ErrorView.vue')
+          component: () => import('@/views/indexViews.vue')
         },
         {
           path: '/about',
@@ -29,6 +24,16 @@ const router = createRouter({
           // which is lazy-loaded when the route is visited.
           component: () => import('@/views/AboutView.vue')
         },
+        {
+          path: '/:pathMatch(.*)*',
+          name: 'ErrorView',
+          component: () => import('@/components/layout/ErrorView.vue')
+        },
+        {
+          path: '/menu',
+          name: 'menu',
+          component: () => import('@/views/menu/MenuIndex.vue')
+        }
       ]
     },
     {
@@ -39,21 +44,19 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('@/views/login/LoginView.vue')
     }
-
   ]
 })
 
 router.beforeEach((to, from, next) => {
   const store = myToken()
   // 判断路由是否需要权限
-  if (to.matched.some(r => r.meta?.requiresAuth)) {
+  if (to.matched.some((r) => r.meta?.requiresAuth)) {
     if (!store.token?.token) {
       next({ name: 'login', query: { redirect: to.fullPath } })
       return
     }
   }
   next() //继续执行
-
 })
 
 export default router

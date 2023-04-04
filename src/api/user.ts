@@ -1,5 +1,14 @@
 import request from '@/utils/request'
 import qs from 'qs'
+
+// 公共类型 提取公共部分
+type commonType<T> = {
+  success: boolean
+  state: number
+  msg: string
+  data: T
+}
+
 // 登录参数格式
 type LoginInFo = {
   userName: string
@@ -8,12 +17,7 @@ type LoginInFo = {
 }
 
 // 返回参数定义
-type LoginResult = {
-  success: boolean
-  data: Array<string>
-  state: number
-  msg: string
-}
+type LoginResult = commonType<Array<string>>
 // 请求登录
 export const LoginUser = (LoginInFo: LoginInFo) => {
   return request<LoginResult>({
@@ -24,12 +28,7 @@ export const LoginUser = (LoginInFo: LoginInFo) => {
 }
 
 // 获取用户信息
-type UserResult = {
-  success: boolean
-  data: Array<string>
-  state: number
-  msg: string
-}
+type UserResult = commonType<Array<string>>
 
 export const getUserInfo = () => {
   return request<UserResult>({
@@ -47,9 +46,20 @@ export const exitUser = () => {
 }
 
 // 刷新token
+let isRefreshToken = false  // 定义刷新中的状态
+let refreshTokenRT: Promise<any> // 返回类型
 export const refreshToken = () => {
-  return request({
+  if (isRefreshToken) {
+    return refreshTokenRT
+  }
+  isRefreshToken = true
+  refreshTokenRT = request({
     method: 'POST',
     url: '/m1/2305304-0-default/token/refresh'
+  }).finally(()=>{
+    isRefreshToken = false
   })
+  return refreshTokenRT
 }
+
+export type {commonType}

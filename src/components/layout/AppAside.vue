@@ -15,13 +15,13 @@ import { isCollapse } from './isCollapse'
             <el-icon>
               <IEpKnifeFork />
             </el-icon>
-            <span>技术部</span>
+            <span>权限管理</span>
           </template>
-          <el-menu-item index="/menus">
+          <el-menu-item index="/menu">
             <el-icon>
               <IEpKnifeFork />
             </el-icon>
-            <span>蛇皮1</span>
+            <span>菜单管理</span>
           </el-menu-item>
           <el-menu-item index="/login">
             <el-icon>
