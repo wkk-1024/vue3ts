@@ -6,6 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 // 自动导入icon
 import Icons from 'unplugin-icons/vite'
@@ -25,7 +26,7 @@ export default defineConfig({
     vue(),
     AutoImport({
       imports: ['vue'], // 自动导入ref() 等组件
-      eslintrc: {  // eslint 
+      eslintrc: {  // eslint
         enabled: true, // <-- this
       },
       resolvers: [
@@ -46,6 +47,7 @@ export default defineConfig({
     Icons({
       autoInstall: true,
     }),
+    VueSetupExtend()
   ],
   resolve: {
     alias: {

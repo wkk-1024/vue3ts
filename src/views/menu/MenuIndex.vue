@@ -31,7 +31,7 @@ const oneMenu = computed(() => {
           :draggable="true"
           :lock-scroll="true"
         >
-          <el-scrollbar style="height: 100%">
+          <el-scrollbar style="height: 100%; overflow: auto">
             <div class="scroll-content" style="max-height: 60vh; margin-right: 10px">
               <el-form label-width="120px">
                 <el-form-item label="Activity name">
@@ -72,11 +72,7 @@ const oneMenu = computed(() => {
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="Activity form">
-                  <el-input type="textarea" />
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="primary">Create</el-button>
-                  <el-button>Cancel</el-button>
+                  <el-input type="textarea" style="overflow-y: auto;" />
                 </el-form-item>
               </el-form>
             </div>

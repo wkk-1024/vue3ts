@@ -3,8 +3,9 @@ import { myToken } from '@/stores/mytoken'
 import { refreshToken } from '@/api/user'
 import router from '@/router'
 
+// noinspection TypeScriptValidateTypes
 const request = axios.create({
-  //baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
@@ -25,7 +26,7 @@ request.interceptors.response.use(
   (response) => response,
   async (error) => {
     console.log('拦截');
-    
+
     if (error.response.status === 401) {
       // token过期
       // 重新请求token

@@ -29,17 +29,23 @@ import { isCollapse } from './isCollapse'
             </el-icon>
             <span>蛇皮2</span>
           </el-menu-item>
-          <el-menu-item index="">
+          <el-menu-item index="/about">
             <el-icon>
               <IEpKnifeFork />
             </el-icon>
             <span>蛇皮3</span>
           </el-menu-item>
-          <el-menu-item index="">
+          <el-menu-item index="/parent/child">
             <el-icon>
               <IEpKnifeFork />
             </el-icon>
-            <span>蛇皮4 </span>
+            <span>子组件</span>
+          </el-menu-item>
+          <el-menu-item index="/parent">
+            <el-icon>
+              <IEpKnifeFork />
+            </el-icon>
+            <span>父组件</span>
           </el-menu-item>
         </el-sub-menu>
 

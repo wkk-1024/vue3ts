@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import { myToken } from '@/stores/mytoken'
 
+// noinspection TypeScriptValidateTypes
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,6 +34,16 @@ const router = createRouter({
           path: '/menu',
           name: 'menu',
           component: () => import('@/views/menu/MenuIndex.vue')
+        },
+        {
+          path: '/parent/child',
+          name: 'parentChild',
+          component: () => import('@/views/parent/Child_Index.vue')
+        },
+        {
+          path: '/parent',
+          name: 'parent',
+          component: () => import('@/views/parent/ParentIndex.vue')
         }
       ]
     },
