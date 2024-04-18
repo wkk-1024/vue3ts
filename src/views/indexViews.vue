@@ -9,7 +9,6 @@ const doubleCount = computed({
 })
 
 state.value.count = 5
-console.log(doubleCount);
 
 </script>
 <template>

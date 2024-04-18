@@ -36,7 +36,7 @@ const submit = async () => {
 
   ElMessage.success(data.msg)
 
-  router.push((route.query.redirect as string) || '/')
+  await router.replace((route.query.redirect as string) || '/')
 }
 
 // 表单校验规则

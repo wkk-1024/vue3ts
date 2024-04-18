@@ -49,27 +49,16 @@ import { isCollapse } from './isCollapse'
           </el-menu-item>
         </el-sub-menu>
 
-        <el-menu-item index="">
-          <el-icon>
-            <IEpKnifeFork />
-          </el-icon>
-          <span>销售部</span>
-        </el-menu-item>
-        <el-menu-item index="">
-          <el-icon>
-            <IEpKnifeFork />
-          </el-icon>
-          <span>广告部</span>
-        </el-menu-item>
-
-        <el-sub-menu index="2">
-          <template>
-            <el-icon>
-              <IEpKnifeFork />
-            </el-icon>
-            <span>采购部</span>
+        <el-sub-menu index="">
+          <template #title>
+            <el-menu-item index="">
+              <el-icon>
+                <IEpKnifeFork />
+              </el-icon>
+              <span>采购部</span>
+            </el-menu-item>
           </template>
-          <el-menu-item index="">
+          <el-menu-item index="/case">
             <el-icon>
               <IEpKnifeFork />
             </el-icon>

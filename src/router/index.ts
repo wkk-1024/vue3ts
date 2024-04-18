@@ -38,12 +38,22 @@ const router = createRouter({
         {
           path: '/parent/child',
           name: 'parentChild',
-          component: () => import('@/views/parent/Child_Index.vue')
+          component: () => import('@/views/parent/ChildIndex.vue')
         },
         {
           path: '/parent',
           name: 'parent',
           component: () => import('@/views/parent/ParentIndex.vue')
+        },
+        {
+          path: '/case',
+          name: 'case',
+          component: () => import('@/views/case/LifeCycle.vue')
+        },
+        {
+          path: '/case/mod',
+          name: 'ModEvent',
+          component: () => import('@/views/case/ModEvent.vue')
         }
       ]
     },

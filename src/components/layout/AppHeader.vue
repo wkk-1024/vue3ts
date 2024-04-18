@@ -18,8 +18,9 @@ const userInfo: UserInfo = reactive({
 
 // 获取用户信息
 getUserInfo().then(res => {
+  res.data.success = true
   if (!res.data.success) {
-    ElMessage.error('错误')
+    ElMessage.error('获取用户信息错误')
     throw new Error('错误')
   }
   Object.assign(userInfo, res.data.data)

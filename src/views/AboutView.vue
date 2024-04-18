@@ -22,12 +22,10 @@ const doubleCount = computed(()=>{
 
 //监听方法 watch
 watch(()=>obj.age,(newValue,oldValue)=>{
-  console.log(newValue,oldValue)
 },{deep:true})
 
 //watchEffect 函数中的响应式数据变化了就回触发函数
 watchEffect(()=>{
-  console.log(count.value,obj)
 })
 const clickHandler = () => {
   // count.value++
@@ -45,7 +43,6 @@ let {name,age} = toRefs(arr)
 
 //关闭监听方法 watch
 const stopWatch = watch(count,(newValue,oldValue)=>{
-  console.log(newValue,oldValue)
   if (newValue>5){
     stopWatch()
   }
@@ -53,7 +50,6 @@ const stopWatch = watch(count,(newValue,oldValue)=>{
 
 //监听reactive 默认开启deep
 watch(obj,(newValue,oldValue)=>{
-  console.log(newValue,oldValue)
 })
 
 //toRaw 把响应式对象转换为普通对象
